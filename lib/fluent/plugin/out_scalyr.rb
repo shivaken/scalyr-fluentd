@@ -192,6 +192,14 @@ module Scalyr
           record["logfile"] = "/fluentd/#{tag}"
         end
 
+        #rename the log field to message since Scalyr displays that as the log line.
+        if record.key? "log"
+          record["message"] = record["log"]
+          record.delete("log")
+        end
+
+        #temporary hack, use the last part of the tag to help define the parser.
+        record["parser"] = tag.split(".")[-1] << "Fluentd"
 
         #append to list of events
         events << { :thread => thread_id.to_s,
