@@ -1,6 +1,8 @@
 Scalyr output plugin for Fluentd
 =========================
 
+This branch is compatible with fluentd 0.14.0 and above, including fluentd 1.0.0
+
 Overview
 --------
 
@@ -29,7 +31,7 @@ For example, if you want to use Scalyr's ```accessLog``` parser for all events w
 
 ```
 <filter scalyr.access>
-  type record_transformer
+  @type record_transformer
   <record>
     parser accessLog
   </record>
@@ -43,7 +45,7 @@ The Scalyr output plugin has a number of sensible defaults so the minimum config
 
 ```
 <match scalyr.*>
-  type @scalyr
+  @type scalyr
   api_write_token YOUR_SCALYR_WRITE_LOGS_TOKEN
 </match>
 ```
@@ -52,7 +54,7 @@ The following configuration options are also supported:
 
 ```
 <match scalyr.*>
-  type @scalyr
+  @type scalyr
 
   #scalyr specific options
   api_write_token YOUR_SCALYR_WRITE_TOKEN
