@@ -154,6 +154,8 @@ module Scalyr
     def format( tag, time, record )
       begin
 
+        $log.debug "@format - time: #{time} - #{record}"
+
         if time.nil?
           time = Fluent::Engine.now
         end
@@ -185,6 +187,8 @@ module Scalyr
             record["message"].force_encoding( @message_encoding )
           end
         end
+        $log.debug "@format - sec: #{time.sec}, nsec: #{time.nsec} - #{record}"
+
         [tag, time.sec, time.nsec, record].to_msgpack
 
       rescue JSON::GeneratorError
